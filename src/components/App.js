@@ -13,12 +13,15 @@ const App = () => {
 
   const [cart, setCart] = useState([]);
 
+  // Add product or increase quantity
   const addToCart = (product) => {
     setCart((prevCart) => {
       const exists = prevCart.find((item) => item.id === product.id);
       if (exists) {
         return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
       } else {
         return [...prevCart, { ...product, quantity: 1 }];
@@ -26,13 +29,16 @@ const App = () => {
     });
   };
 
+  // Remove product or decrease quantity
   const removeFromCart = (productId) => {
     setCart((prevCart) =>
       prevCart
         .map((item) =>
-          item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+          item.id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
         )
-        .filter((item) => item.quantity > 0) 
+        .filter((item) => item.quantity > 0)
     );
   };
 

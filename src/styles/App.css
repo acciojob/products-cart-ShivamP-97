@@ -1,3 +1,4 @@
+/* Products Container */
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -5,13 +6,14 @@
   margin: 20px;
 }
 
+/* Product Item */
 .item {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border: 1px solid rgb(204, 204, 204); 
+  border: 1px solid rgb(204, 204, 204) !important; 
   border-radius: 5px;
   background-color: white;
 }
@@ -21,6 +23,7 @@
   font-weight: bold;
 }
 
+/* Cart Section */
 .cart {
   margin: 20px;
   padding: 20px;
@@ -30,7 +33,6 @@
 }
 
 .cart h2 {
-  color: white;
   margin-bottom: 15px;
 }
 
@@ -61,6 +63,7 @@
   font-weight: bold;
 }
 
+/* Buttons */
 button {
   background-color: #3498db;
   color: white;
@@ -75,6 +78,7 @@ button:hover {
   background-color: #2980b9;
 }
 
+/* Remove buttons in cart */
 .cart button {
   background-color: #e74c3c;
 }
