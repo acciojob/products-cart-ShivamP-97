@@ -13,14 +13,27 @@ const App = () => {
 
   const [cart, setCart] = useState([]);
 
-  // Add item with unique key
   const addToCart = (product) => {
-    setCart([...cart, { ...product, key: Date.now() + Math.random() }]);
+    setCart((prevCart) => {
+      const exists = prevCart.find((item) => item.id === product.id);
+      if (exists) {
+        return prevCart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
   };
 
-  // Remove item by unique key
-  const removeFromCart = (key) => {
-    setCart(cart.filter((item) => item.key !== key));
+  const removeFromCart = (productId) => {
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0) 
+    );
   };
 
   return (
@@ -44,9 +57,11 @@ const App = () => {
         ) : (
           <ul>
             {cart.map((item) => (
-              <li key={item.key}>
-                <span>{item.name}</span>
-                <button onClick={() => removeFromCart(item.key)}>Remove</button>
+              <li key={item.id}>
+                <span>
+                  {item.name} {item.quantity > 1 && `x ${item.quantity}`}
+                </span>
+                <button onClick={() => removeFromCart(item.id)}>Remove</button>
               </li>
             ))}
           </ul>
